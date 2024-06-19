@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model messages {
+  id         String   @id
+  text       String
+  created_at DateTime @default(now())
+}
+
+model users {
+  id               String @id(map: "users_pk") @db.Uuid
+  name             String @db.VarChar
+  email            String @unique(map: "users_unique") @db.VarChar
+  password         String @db.VarChar
+  profilephotolink String @db.VarChar
+}
+
+model chats {
+  id            Int     @id(map: "chats_pk") @default(autoincrement())
+  users         Json
+  lastmessage   String? @db.VarChar
+  isgroupchat   String? @db.VarChar
+  groupadminid  String? @db.VarChar
+  groupchatname String? @db.VarChar
+}
+
+model message {
+  id          Int      @id(map: "messages_pk") @default(autoincrement())
+  chatid      Int
+  messagetext String?  @db.VarChar
+  senderid    String   @db.VarChar
+  timestamp   DateTime @default(now()) @db.Timestamptz(6)
+  readby      Json?
+  sendername  String?  @db.VarChar
+}
