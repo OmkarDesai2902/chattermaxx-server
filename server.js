@@ -26,7 +26,7 @@ var corsOptions = {
 }
 app.use(cors(corsOptions));
 
-console.log(cors())
+console.log(cors)
 app.use('/api/user',userData);
 app.use('/api/chats',protectRoute,chatRoute);
 app.use('/api/messages',protectRoute,messageRoute);
