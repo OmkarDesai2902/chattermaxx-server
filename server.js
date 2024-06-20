@@ -25,6 +25,8 @@ var corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions));
+
+console.log(cors())
 app.use('/api/user',userData);
 app.use('/api/chats',protectRoute,chatRoute);
 app.use('/api/messages',protectRoute,messageRoute);
