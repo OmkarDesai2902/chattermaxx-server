@@ -21,12 +21,12 @@ const app = express()
 app.use(express.json());
 
 var corsOptions = {
-  origin: 'process.env.CLIENT_URL',
+  origin: 'https://chattermaxx.onrender.com',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions));
 
-console.log(cors)
+console.log(corsOptions)
 app.use('/api/user',userData);
 app.use('/api/chats',protectRoute,chatRoute);
 app.use('/api/messages',protectRoute,messageRoute);
