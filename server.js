@@ -9,7 +9,7 @@ const { protectRoute } = require('./middlewares/authRequests');
 const Redis = require('ioredis');
 const [produceMessage,startMessageConsumer,mf] = require('./services/kafka');
 const { compare } = require('bcryptjs');
-
+var cors = require('cors')
 
 
 const pub = new Redis(process.env.REDIS_URL)
@@ -20,6 +20,11 @@ const sub = new Redis(process.env.REDIS_URL)
 const app = express()
 app.use(express.json());
 
+var corsOptions = {
+  origin: 'process.env.CLIENT_URL',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
 app.use('/api/user',userData);
 app.use('/api/chats',protectRoute,chatRoute);
 app.use('/api/messages',protectRoute,messageRoute);
