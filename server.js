@@ -48,7 +48,7 @@ const io = require('socket.io')(_server,
     pingTimeout: 60000,
     cors :{
       allowedHeaders: ['*'],
-      origin:process.env.CLIENT_URL,
+      origin: 'https://chattermaxx.onrender.com',
     },
   }
 )
